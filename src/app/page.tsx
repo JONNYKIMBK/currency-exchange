@@ -1,10 +1,12 @@
-import Currency from "./components/currency/currency";
+import Graph from "./components/graph/graph";
+import Today from "./components/today/today";
 
 export default function Home() {
   return (
     <div>
-      hola
-      <Currency />
+      Dolar
+      <Today />
+      <Graph />
     </div>
   );
 }
