@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 type Data = [string, number, number];
 
-export async function GET(request: NextApiRequest, { params }: any) {
+export async function GET(request: NextRequest, { params }: any) {
   const getToday = (date: Date) => {
     const year = date.getUTCFullYear();
     const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
