@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
+import { Box, TextField, Typography } from "@mui/material";
 
 export default function Graph() {
   const [data, setData] = useState<DataRow[]>([]);
@@ -10,6 +11,8 @@ export default function Graph() {
   const [startDate, setStartDate] = useState("n");
   const [endDate, setEndDate] = useState("n");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   type ApiDataRow = [string, number, number];
 
   interface DataRow {
@@ -17,6 +20,44 @@ export default function Graph() {
     value1: number;
     value2: number;
   }
+
+  const handleStartDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newStartDate = event.target.value;
+    if (
+      new Date(newStartDate) < new Date() &&
+      (endDate === "n" ||
+        !endDate ||
+        new Date(newStartDate) < new Date(endDate))
+    ) {
+      setStartDate(newStartDate);
+      setErrorMessage("");
+    } else {
+      setStartDate("n");
+      setErrorMessage(
+        "Start date must be before the current date and the end date."
+      );
+    }
+  };
+
+  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newEndDate = event.target.value;
+    if (
+      new Date(newEndDate) < new Date() &&
+      (startDate === "n" ||
+        !startDate ||
+        new Date(newEndDate) > new Date(startDate))
+    ) {
+      setEndDate(newEndDate);
+      setErrorMessage("");
+    } else {
+      setEndDate("n");
+      setErrorMessage(
+        "End date must be before the current date and after the start date."
+      );
+    }
+  };
 
   function generateTicks(data: DataRow[], numTicks: number): Date[] {
     const dates = data.map((row) => new Date(row.date));
@@ -63,34 +104,74 @@ export default function Graph() {
 
     const options = {
       title: "Dollar",
+      titleTextStyle: {
+        color: "white",
+      },
       hAxis: {
         ticks: ticks,
         format: format,
+        textStyle: {
+          color: "white",
+        },
+        gridlines: {
+          color: "white",
+        },
       },
+      vAxis: {
+        textStyle: {
+          color: "white",
+        },
+        gridlines: {
+          color: "white",
+        },
+      },
+      legend: {
+        textStyle: {
+          color: "white",
+        },
+      },
+      colors: ["#00ff00", "#4169e1"],
+      backgroundColor: "#212121",
     };
 
     return (
-      <div>
-        Graph
-        <div>
-          <label>
-            Start Date:
-            <input
-              type="date"
-              value={startDate}
-              onChange={(event) => setStartDate(event.target.value)}
-            />
-          </label>
-          <label>
-            End Date:
-            <input
-              type="date"
-              value={endDate}
-              onChange={(event) => setEndDate(event.target.value)}
-            />
-          </label>
-          {/* ... */}
-        </div>
+      <Box sx={{ backgroundColor: "#212121" }}>
+        <Typography variant="h5" style={{ color: "white" }}>
+          Graph
+        </Typography>
+        <Box sx={{ marginTop: 2 }}>
+          <TextField
+            label="Start Date"
+            type="date"
+            value={startDate}
+            onChange={handleStartDateChange}
+            InputLabelProps={{
+              shrink: true,
+              style: { color: "white" },
+            }}
+            InputProps={{
+              style: { color: "white" },
+            }}
+          />
+          <TextField
+            label="End Date"
+            type="date"
+            value={endDate}
+            onChange={handleEndDateChange}
+            InputLabelProps={{
+              shrink: true,
+              style: { color: "white" },
+            }}
+            InputProps={{
+              style: { color: "white" },
+            }}
+          />
+          {errorMessage && (
+            <Typography variant="body1" style={{ color: "red" }}>
+              {errorMessage}
+            </Typography>
+          )}
+        </Box>
         <Chart
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
@@ -99,9 +180,7 @@ export default function Graph() {
           width={"100%"}
           height={"400px"}
         />
-      </div>
+      </Box>
     );
-  } else {
-    return <div></div>;
   }
 }
