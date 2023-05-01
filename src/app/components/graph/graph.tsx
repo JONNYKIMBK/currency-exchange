@@ -134,53 +134,55 @@ export default function Graph() {
       backgroundColor: "#212121",
     };
 
-    return (
-      <Box sx={{ backgroundColor: "#212121" }}>
-        <Typography variant="h5" style={{ color: "white" }}>
-          Graph
-        </Typography>
-        <Box sx={{ marginTop: 2 }}>
-          <TextField
-            label="Start Date"
-            type="date"
-            value={startDate}
-            onChange={handleStartDateChange}
-            InputLabelProps={{
-              shrink: true,
-              style: { color: "white" },
-            }}
-            InputProps={{
-              style: { color: "white" },
-            }}
+    if (data.length) {
+      return (
+        <Box sx={{ backgroundColor: "#212121" }}>
+          <Typography variant="h5" style={{ color: "white" }}>
+            Graph
+          </Typography>
+          <Box sx={{ marginTop: 2 }}>
+            <TextField
+              label="Start Date"
+              type="date"
+              value={startDate}
+              onChange={handleStartDateChange}
+              InputLabelProps={{
+                shrink: true,
+                style: { color: "white" },
+              }}
+              InputProps={{
+                style: { color: "white" },
+              }}
+            />
+            <TextField
+              label="End Date"
+              type="date"
+              value={endDate}
+              onChange={handleEndDateChange}
+              InputLabelProps={{
+                shrink: true,
+                style: { color: "white" },
+              }}
+              InputProps={{
+                style: { color: "white" },
+              }}
+            />
+            {errorMessage && (
+              <Typography variant="body1" style={{ color: "red" }}>
+                {errorMessage}
+              </Typography>
+            )}
+          </Box>
+          <Chart
+            chartType="LineChart"
+            loader={<div>Loading Chart</div>}
+            data={chartData}
+            options={options}
+            width={"100%"}
+            height={"400px"}
           />
-          <TextField
-            label="End Date"
-            type="date"
-            value={endDate}
-            onChange={handleEndDateChange}
-            InputLabelProps={{
-              shrink: true,
-              style: { color: "white" },
-            }}
-            InputProps={{
-              style: { color: "white" },
-            }}
-          />
-          {errorMessage && (
-            <Typography variant="body1" style={{ color: "red" }}>
-              {errorMessage}
-            </Typography>
-          )}
         </Box>
-        <Chart
-          chartType="LineChart"
-          loader={<div>Loading Chart</div>}
-          data={chartData}
-          options={options}
-          width={"100%"}
-          height={"400px"}
-        />
-      </Box>
-    );
+      );
+    }
   }
 }
