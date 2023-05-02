@@ -171,7 +171,7 @@ export default function Graph() {
             InputProps={{
               style: { color: "white" },
             }}
-            sx={{ "& fieldset": { borderColor: "white" } }}
+            sx={{ "& fieldset": { borderColor: "white" }, marginBottom: 2 }}
           />
           <TextField
             label="End Date"
@@ -185,7 +185,7 @@ export default function Graph() {
             InputProps={{
               style: { color: "white" },
             }}
-            sx={{ "& fieldset": { borderColor: "white" } }}
+            sx={{ "& fieldset": { borderColor: "white" }, marginBottom: 2 }}
           />
 
           <Button onClick={handleReset} variant="contained">
@@ -207,6 +207,11 @@ export default function Graph() {
           width={"100%"}
           height={"400px"}
         />
+
+        <Box sx={{ fontSize: 15, display: "flex", justifyContent: "center" }}>
+          This page uses the average value between the buy and sell value of the
+          dollar
+        </Box>
       </Box>
     );
   }

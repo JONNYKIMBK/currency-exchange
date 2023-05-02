@@ -48,10 +48,19 @@ export default function Today() {
         display: "flex",
         justifyContent: { xs: "space-evenly", sm: "center" },
         flexDirection: { xs: "column", sm: "row" },
+        alignItems: { sm: "center" },
+        marginBottom: 2,
       }}
     >
       <Box sx={{ marginRight: { sm: 10 } }}>
-        <p>Dollar</p>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "center", sm: "flex-start" },
+          }}
+        >
+          <p>Dollar</p>
+        </Box>
         <Box
           sx={{
             display: "flex",
@@ -82,12 +91,10 @@ export default function Today() {
         }}
       >
         <Box sx={{ color: "#00ff00", marginRight: { sm: 2 } }}>
-          <p>Oficial:</p>
-          {value.oficial.value_avg}
+          <p>Oficial:</p>$ {value.oficial.value_avg}
         </Box>
         <Box sx={{ color: "#4169e1" }}>
-          <p>Blue:</p>
-          {value.blue.value_avg}
+          <p>Blue:</p>$ {value.blue.value_avg}
         </Box>
       </Box>
     </Box>

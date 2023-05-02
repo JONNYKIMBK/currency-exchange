@@ -69,7 +69,7 @@ export async function GET(request: NextRequest, { params }: any) {
   } else {
     let daysFound = 0;
 
-    for (let i = 1; daysFound < 6; i++) {
+    for (let i = 1; daysFound < 30; i++) {
       const currentDate = subtractDays(new Date(), i);
       if (currentDate.getUTCDay() === 0 || currentDate.getUTCDay() === 6) {
         continue;
