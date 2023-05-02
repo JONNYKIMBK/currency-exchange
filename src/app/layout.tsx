@@ -1,6 +1,7 @@
 import Links from "./components/links/links";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Links />
         {children}
+        <Analytics />
       </body>
     </html>
   );
