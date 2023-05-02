@@ -209,8 +209,8 @@ export default function Graph() {
         />
 
         <Box sx={{ fontSize: 15, display: "flex", justifyContent: "center" }}>
-          This page uses the average value between the buy and sell value of the
-          dollar
+          This page uses the average value between the buying and selling value
+          of the dollar in Argentina.
         </Box>
       </Box>
     );
