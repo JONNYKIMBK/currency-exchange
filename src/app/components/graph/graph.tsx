@@ -171,6 +171,7 @@ export default function Graph() {
             InputProps={{
               style: { color: "white" },
             }}
+            sx={{ "& fieldset": { borderColor: "white" } }}
           />
           <TextField
             label="End Date"
@@ -184,6 +185,7 @@ export default function Graph() {
             InputProps={{
               style: { color: "white" },
             }}
+            sx={{ "& fieldset": { borderColor: "white" } }}
           />
 
           <Button onClick={handleReset} variant="contained">
