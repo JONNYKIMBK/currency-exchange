@@ -70,7 +70,11 @@ export default function Today() {
           <TextField
             type="number"
             value={inputValue}
-            onChange={(e) => setInputValue(parseInt(e.target.value))}
+            onChange={(e) =>
+              setInputValue(
+                e.target.value === "" ? 0 : parseInt(e.target.value)
+              )
+            }
             sx={{
               width: 100,
               "& input": { color: "white" },
