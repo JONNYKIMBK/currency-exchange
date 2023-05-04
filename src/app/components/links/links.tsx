@@ -27,7 +27,7 @@ const links = [
   },
   {
     label: "Github",
-    route: "https://github.com/JONNYKIMBK",
+    route: "https://github.com/JONNYKIMBK/dollar-blue",
     icon: <GitHubIcon sx={icon} />,
   },
 ];
