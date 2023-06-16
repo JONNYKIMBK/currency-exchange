@@ -16,12 +16,18 @@ export async function GET(request: NextRequest, { params }: any) {
     params.pars[1] !== "n" ? params.pars[1] : getToday(new Date());
 
   const todayValueResponse = await fetch(
-    "https://api.bluelytics.com.ar/v2/latest"
+    "https://api.bluelytics.com.ar/v2/latest",
+    {
+      next: { revalidate: 0 },
+    }
   );
   const todayValue = await todayValueResponse.json();
 
   const historicValueResponse = await fetch(
-    "https://api.bluelytics.com.ar/v2/evolution.json"
+    "https://api.bluelytics.com.ar/v2/evolution.json",
+    {
+      next: { revalidate: 0 },
+    }
   );
   const historicValue = await historicValueResponse.json();
 
