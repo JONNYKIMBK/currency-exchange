@@ -22,6 +22,7 @@ export default function Today() {
         return value.json();
       });
       setValue(todayValue);
+      console.log(todayValue);
 
       setOriginalValue(todayValue);
     };
