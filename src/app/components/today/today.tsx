@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 export default function Today() {
   const [value, setValue] = useState({
     oficial: {
-      value_avg: 0,
+      value_sell: 0,
     },
     blue: {
-      value_avg: 0,
+      value_sell: 0,
     },
   });
   const [originalValue, setOriginalValue] = useState(value);
@@ -30,15 +30,15 @@ export default function Today() {
   }, []);
 
   useEffect(() => {
-    const newOficialValue = originalValue.oficial.value_avg * inputValue;
-    const newBlueValue = originalValue.blue.value_avg * inputValue;
+    const newOficialValue = originalValue.oficial.value_sell * inputValue;
+    const newBlueValue = originalValue.blue.value_sell * inputValue;
 
     setValue({
       oficial: {
-        value_avg: newOficialValue,
+        value_sell: newOficialValue,
       },
       blue: {
-        value_avg: newBlueValue,
+        value_sell: newBlueValue,
       },
     });
   }, [inputValue]);
@@ -96,10 +96,10 @@ export default function Today() {
         }}
       >
         <Box sx={{ color: "#00ff00", marginRight: { sm: 2 } }}>
-          <p>Oficial:</p>$ {value.oficial.value_avg}
+          <p>Oficial:</p>$ {value.oficial.value_sell}
         </Box>
         <Box sx={{ color: "#4169e1" }}>
-          <p>Blue:</p>$ {value.blue.value_avg}
+          <p>Blue:</p>$ {value.blue.value_sell}
         </Box>
       </Box>
     </Box>

@@ -208,10 +208,10 @@ export default function Graph() {
           height={"400px"}
         />
 
-        <Box sx={{ fontSize: 15, display: "flex", justifyContent: "center" }}>
+        {/* <Box sx={{ fontSize: 15, display: "flex", justifyContent: "center" }}>
           This page uses the average value between the buying and selling value
           of the dollar in Argentina.
-        </Box>
+        </Box> */}
       </Box>
     );
   }

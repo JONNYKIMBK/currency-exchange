@@ -114,7 +114,11 @@ export async function GET(request: NextRequest, { params }: any) {
         .map((row): Data => [row[0], row[1], row[2]])
     );
   } else {
-    data.push([today, todayValue.oficial.value_avg, todayValue.blue.value_avg]);
+    data.push([
+      today,
+      todayValue.oficial.value_sell,
+      todayValue.blue.value_sell,
+    ]);
     data = data.concat(week.map((row): Data => [row[0], row[1], row[2]]));
   }
 
