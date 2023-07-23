@@ -23,6 +23,7 @@ export default function Today() {
       });
       setValue(todayValue);
       console.log(todayValue);
+      console.log(Date());
 
       setOriginalValue(todayValue);
     };
