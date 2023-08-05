@@ -18,14 +18,28 @@ export default function Today() {
 
   useEffect(() => {
     const getTodayValue = async () => {
-      const todayValue = await fetch(`/api/today`).then((value) => {
+      const todayValue = await fetch(`/api/graph/n/n`).then((value) => {
         return value.json();
       });
-      setValue(todayValue);
-      console.log(todayValue);
+      setValue({
+        oficial: {
+          value_sell: todayValue.data[1][1],
+        },
+        blue: {
+          value_sell: todayValue.data[1][2],
+        },
+      });
+      console.log(todayValue.data[1]);
       console.log(Date());
 
-      setOriginalValue(todayValue);
+      setOriginalValue({
+        oficial: {
+          value_sell: todayValue.data[1][1],
+        },
+        blue: {
+          value_sell: todayValue.data[1][2],
+        },
+      });
     };
     getTodayValue();
   }, []);
