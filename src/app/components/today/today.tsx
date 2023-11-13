@@ -7,9 +7,11 @@ export default function Today() {
   const [value, setValue] = useState({
     oficial: {
       value_sell: 0,
+      value_buy: 0,
     },
     blue: {
       value_sell: 0,
+      value_buy: 0,
     },
   });
   const [originalValue, setOriginalValue] = useState(value);
@@ -21,23 +23,28 @@ export default function Today() {
       const todayValue = await fetch(`/api/graph/n/n`).then((value) => {
         return value.json();
       });
+
       setValue({
         oficial: {
           value_sell: todayValue.data[1][1],
+          value_buy: todayValue.data[1][2],
         },
         blue: {
-          value_sell: todayValue.data[1][2],
+          value_sell: todayValue.data[1][3],
+          value_buy: todayValue.data[1][4],
         },
       });
-      console.log(todayValue.data[1]);
-      console.log(Date());
+      // console.log(todayValue.data[1]);
+      // console.log(Date());
 
       setOriginalValue({
         oficial: {
           value_sell: todayValue.data[1][1],
+          value_buy: todayValue.data[1][2],
         },
         blue: {
-          value_sell: todayValue.data[1][2],
+          value_sell: todayValue.data[1][3],
+          value_buy: todayValue.data[1][4],
         },
       });
     };
@@ -45,15 +52,20 @@ export default function Today() {
   }, []);
 
   useEffect(() => {
-    const newOficialValue = originalValue.oficial.value_sell * inputValue;
-    const newBlueValue = originalValue.blue.value_sell * inputValue;
+    const newOficialValueSell = originalValue.oficial.value_sell * inputValue;
+    const newOficialValueBuy = originalValue.oficial.value_buy * inputValue;
+
+    const newBlueValueSell = originalValue.blue.value_sell * inputValue;
+    const newBlueValueBuy = originalValue.blue.value_buy * inputValue;
 
     setValue({
       oficial: {
-        value_sell: newOficialValue,
+        value_sell: newOficialValueSell,
+        value_buy: newOficialValueBuy,
       },
       blue: {
-        value_sell: newBlueValue,
+        value_sell: newBlueValueSell,
+        value_buy: newBlueValueBuy,
       },
     });
   }, [inputValue]);
@@ -110,11 +122,20 @@ export default function Today() {
           justifyContent: "space-evenly",
         }}
       >
+        <Box sx={{ marginTop: 5.5, marginRight: 1 }}>
+          <p>Venta:</p>
+
+          <p>Compra:</p>
+        </Box>
         <Box sx={{ color: "#00ff00", marginRight: { sm: 2 } }}>
-          <p>Oficial:</p>$ {value.oficial.value_sell}
+          <p>Oficial:</p>
+          <p>$ {value.oficial.value_sell}</p>
+          <p>$ {value.oficial.value_buy}</p>
         </Box>
         <Box sx={{ color: "#4169e1" }}>
-          <p>Blue:</p>$ {value.blue.value_sell}
+          <p>Blue:</p>
+          <p>$ {value.blue.value_sell}</p>
+          <p>$ {value.blue.value_buy}</p>
         </Box>
       </Box>
     </Box>

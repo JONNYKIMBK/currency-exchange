@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-type Data = [string, number, number];
+type Data = [string, number, number, number, number];
 
 export async function GET(request: NextRequest, { params }: any) {
   const getToday = (date: Date) => {
@@ -64,8 +64,10 @@ export async function GET(request: NextRequest, { params }: any) {
         if (officialValue && blueValue) {
           week.push([
             day,
-            (officialValue.value_sell + officialValue.value_buy) / 2,
-            (blueValue.value_sell + blueValue.value_buy) / 2,
+            officialValue.value_sell,
+            officialValue.value_buy,
+            blueValue.value_sell,
+            blueValue.value_buy,
           ]);
         }
       }
@@ -90,8 +92,10 @@ export async function GET(request: NextRequest, { params }: any) {
       if (officialValue && blueValue) {
         week.push([
           day,
-          (officialValue.value_sell + officialValue.value_buy) / 2,
-          (blueValue.value_sell + blueValue.value_buy) / 2,
+          officialValue.value_sell,
+          officialValue.value_buy,
+          blueValue.value_sell,
+          blueValue.value_buy,
         ]);
       }
     }
@@ -111,15 +115,21 @@ export async function GET(request: NextRequest, { params }: any) {
             date.getUTCDay() !== 6
           );
         })
-        .map((row): Data => [row[0], row[1], row[2]])
+        .map((row): Data => [row[0], row[1], row[2], row[3], row[4]])
     );
   } else {
     data.push([
       today,
+
       todayValue.oficial.value_sell,
+      todayValue.oficial.value_buy,
+
       todayValue.blue.value_sell,
+      todayValue.blue.value_buy,
     ]);
-    data = data.concat(week.map((row): Data => [row[0], row[1], row[2]]));
+    data = data.concat(
+      week.map((row): Data => [row[0], row[1], row[2], row[3], row[4]])
+    );
   }
 
   const response = {

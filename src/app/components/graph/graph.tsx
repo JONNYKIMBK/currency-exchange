@@ -13,7 +13,7 @@ export default function Graph() {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  type ApiDataRow = [string, number, number];
+  type ApiDataRow = [string, number, number, number, number];
 
   interface DataRow {
     date: string;
@@ -91,7 +91,7 @@ export default function Graph() {
       const mappedData = todayGraph.data.slice(1).map((row: ApiDataRow) => ({
         date: row[0],
         value1: row[1],
-        value2: row[2],
+        value2: row[3],
       }));
 
       setData(mappedData);
