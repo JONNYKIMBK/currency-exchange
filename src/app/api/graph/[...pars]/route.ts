@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-type Data = [string, number, number, number, number];
+type Data = [string, number, number, number, number, number, number];
 
 export async function GET(request: NextRequest, { params }: any) {
   const getToday = (date: Date) => {
@@ -21,7 +21,16 @@ export async function GET(request: NextRequest, { params }: any) {
       next: { revalidate: 0 },
     }
   );
+
+  const todayValueCriptoResponse = await fetch(
+    "https://criptoya.com/api/lemoncashp2p/usdt/ars/0.1",
+    {
+      next: { revalidate: 0 },
+    }
+  );
+
   const todayValue = await todayValueResponse.json();
+  const todayCriptoValue = await todayValueCriptoResponse.json();
 
   const historicValueResponse = await fetch(
     "https://api.bluelytics.com.ar/v2/evolution.json",
@@ -68,6 +77,8 @@ export async function GET(request: NextRequest, { params }: any) {
             officialValue.value_buy,
             blueValue.value_sell,
             blueValue.value_buy,
+            0,
+            0,
           ]);
         }
       }
@@ -96,6 +107,8 @@ export async function GET(request: NextRequest, { params }: any) {
           officialValue.value_buy,
           blueValue.value_sell,
           blueValue.value_buy,
+          0,
+          0,
         ]);
       }
     }
@@ -115,7 +128,17 @@ export async function GET(request: NextRequest, { params }: any) {
             date.getUTCDay() !== 6
           );
         })
-        .map((row): Data => [row[0], row[1], row[2], row[3], row[4]])
+        .map(
+          (row): Data => [
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+            row[6],
+          ]
+        )
     );
   } else {
     data.push([
@@ -126,9 +149,14 @@ export async function GET(request: NextRequest, { params }: any) {
 
       todayValue.blue.value_sell,
       todayValue.blue.value_buy,
+
+      Math.trunc(todayCriptoValue.totalAsk),
+      Math.trunc(todayCriptoValue.totalBid),
     ]);
     data = data.concat(
-      week.map((row): Data => [row[0], row[1], row[2], row[3], row[4]])
+      week.map(
+        (row): Data => [row[0], row[1], row[2], row[3], row[4], row[5], row[6]]
+      )
     );
   }
 

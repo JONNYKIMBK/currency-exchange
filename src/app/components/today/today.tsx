@@ -13,6 +13,11 @@ export default function Today() {
       value_sell: 0,
       value_buy: 0,
     },
+
+    crypto: {
+      value_sell: 0,
+      value_buy: 0,
+    },
   });
   const [originalValue, setOriginalValue] = useState(value);
 
@@ -33,8 +38,13 @@ export default function Today() {
           value_sell: todayValue.data[1][3],
           value_buy: todayValue.data[1][4],
         },
+
+        crypto: {
+          value_sell: todayValue.data[1][5],
+          value_buy: todayValue.data[1][6],
+        },
       });
-      // console.log(todayValue.data[1]);
+      console.log(todayValue.data[1]);
       // console.log(Date());
 
       setOriginalValue({
@@ -45,6 +55,11 @@ export default function Today() {
         blue: {
           value_sell: todayValue.data[1][3],
           value_buy: todayValue.data[1][4],
+        },
+
+        crypto: {
+          value_sell: todayValue.data[1][5],
+          value_buy: todayValue.data[1][6],
         },
       });
     };
@@ -58,6 +73,9 @@ export default function Today() {
     const newBlueValueSell = originalValue.blue.value_sell * inputValue;
     const newBlueValueBuy = originalValue.blue.value_buy * inputValue;
 
+    const newCriptoValueSell = originalValue.crypto.value_sell * inputValue;
+    const newCriptoValueBuy = originalValue.crypto.value_buy * inputValue;
+
     setValue({
       oficial: {
         value_sell: newOficialValueSell,
@@ -66,6 +84,11 @@ export default function Today() {
       blue: {
         value_sell: newBlueValueSell,
         value_buy: newBlueValueBuy,
+      },
+
+      crypto: {
+        value_sell: newCriptoValueSell,
+        value_buy: newCriptoValueBuy,
       },
     });
   }, [inputValue]);
@@ -132,10 +155,16 @@ export default function Today() {
           <p>$ {value.oficial.value_sell}</p>
           <p>$ {value.oficial.value_buy}</p>
         </Box>
-        <Box sx={{ color: "#4169e1" }}>
+        <Box sx={{ color: "#4169e1", marginRight: { sm: 2 } }}>
           <p>Blue:</p>
           <p>$ {value.blue.value_sell}</p>
           <p>$ {value.blue.value_buy}</p>
+        </Box>
+
+        <Box sx={{ color: "#ffff00" }}>
+          <p>Cripto:</p>
+          <p>$ {value.crypto.value_sell}</p>
+          <p>$ {value.crypto.value_buy}</p>
         </Box>
       </Box>
     </Box>
