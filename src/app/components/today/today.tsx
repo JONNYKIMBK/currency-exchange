@@ -145,7 +145,8 @@ export default function Today() {
           justifyContent: "space-evenly",
         }}
       >
-        <Box sx={{ marginTop: 5.5, marginRight: 1 }}>
+        <Box sx={{ marginRight: { sm: 2 } }}>
+          <p style={{ color: "#212121" }}>.</p>
           <p>Venta:</p>
 
           <p>Compra:</p>
