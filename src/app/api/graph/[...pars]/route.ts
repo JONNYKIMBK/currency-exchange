@@ -23,7 +23,7 @@ export async function GET(request: NextRequest, { params }: any) {
   );
 
   const todayValueCriptoResponse = await fetch(
-    "https://criptoya.com/api/lemoncashp2p/usdt/ars/0.1",
+    "https://criptoya.com/api/lemoncash/usdt/ars/0.1",
     {
       next: { revalidate: 0 },
     }
@@ -150,8 +150,8 @@ export async function GET(request: NextRequest, { params }: any) {
       todayValue.blue.value_sell,
       todayValue.blue.value_buy,
 
-      Math.trunc(todayCriptoValue.totalAsk),
-      Math.trunc(todayCriptoValue.totalBid),
+      Math.trunc(todayCriptoValue.ask),
+      Math.trunc(todayCriptoValue.bid),
     ]);
     data = data.concat(
       week.map(
