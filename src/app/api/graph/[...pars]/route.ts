@@ -23,7 +23,9 @@ export async function GET(request: NextRequest, { params }: any) {
   );
 
   const todayValueCriptoResponse = await fetch(
-    "https://criptoya.com/api/lemoncash/usdt/ars/0.1",
+    `https://criptoya.com/api/${
+      params.pars[2] ? params.pars[2] : "binance"
+    }/usdt/ars/0.1`,
     {
       next: { revalidate: 0 },
     }
