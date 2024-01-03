@@ -216,6 +216,7 @@ export default function Today() {
             >
               <MenuItem value={"binance"}>Binance</MenuItem>
               <MenuItem value={"lemoncash"}>Lemon</MenuItem>
+              <MenuItem value={"bitsoalpha"}>Bitso</MenuItem>
               <MenuItem value={"belo"}>Belo</MenuItem>
               <MenuItem value={"buenbit"}>Buenbit</MenuItem>
             </Select>
